@@ -1,0 +1,418 @@
+<html>
+    <head>
+    	<title>Home - The New Camera House</title>
+        <link rel="icon" type="image/x-icon" href="/icon.svg">
+        
+        <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+        
+        <style>
+            * {
+            	margin: 0;
+                padding: 0;
+                
+                box-sizing: border-box;
+                
+                color: white;
+                font-family: Helvetica, Arial;
+                text-decoration: none;
+                
+                font-size: 1rem;
+            }
+
+            :root {
+                background-color: grey;
+            }
+        </style>
+        
+        <style>
+            nav {
+            	position: fixed;
+                
+                top: 0;
+                left: 0;
+                right: 0;
+            
+            	display: flex;
+                gap: 0.75rem;
+                
+                padding: 0 0.75rem;
+                
+                z-index: 100;
+                
+                transition: background-color 0.5s;
+                
+                .bg {
+                	position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 100%;
+                    
+                    background-image: linear-gradient(black, transparent);
+                    
+                    opacity: 0;
+                    
+                    transition: opacity 0.5s;
+                }
+                
+                a {
+                    position: relative;
+
+                    padding: 0.5rem;
+
+                    font-weight: 500;
+                    font-size: 1.25rem;
+                    text-decoration: none;
+                    
+                    transition: translate 0.25s;
+				}
+                
+                a:hover {
+                	translate: 0 -0.25rem;
+                }
+                
+                a.active {
+            		font-weight: 700;
+				}
+                
+            }
+            
+            nav.active .bg {
+            	opacity: 0.75;
+            }
+        </style>
+        
+        <style>
+        	header {
+            	position: relative;
+            
+            	width: 100%;
+                height: 100dvh;
+                
+                .logo {
+                    position: absolute;
+
+                    top: 3rem;
+                    right: 3rem;
+                    width: 50%;
+                    height: 8rem;
+                    
+                    pointer-events: none;
+                    
+                    img {
+            			width: 100%;
+            		}
+            	}
+                
+                .dots {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 1rem;
+
+                    padding: 0 1rem;
+                    
+                    .dot {
+                        height: 2em;
+                        aspect-ratio: 1;
+                        
+                        background-color: white;
+                        
+                        border-radius: 100%;
+
+                        scale: 0.75;
+                        
+                        opacity: 0.5;
+                        
+                        transition: all 1s;
+            		}
+                    
+                    .dot.active {
+                    	opacity: 1;
+                    
+                        scale: 1;
+            		}
+                    
+                    .dot:not(.active):hover {
+                    	opacity: 0.75;
+                        
+                        transition: opacity 0.25s;
+                    }
+            	}
+                
+                .backgrounds {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    
+                    .background {
+                    	position: absolute;
+                        inset: 0;
+                        
+                        pointer-events: none;
+                        
+                        opacity: 0;
+                        
+                        transition: opacity 1s;
+                        
+                        img {
+                        	height: 100%;
+                            width: 100%;
+                            
+                            object-fit: cover;
+                            
+                            filter: blur(3px);
+                        }
+                        
+                        .text {
+                        	position: absolute;
+                            bottom: 3rem;
+                            right: 3rem;
+                            
+                            max-width: 50%;
+                            
+                            text-align: right;
+                            
+                            h1 {
+                            	position: relative;
+                            
+                            	font-size: 5rem;
+                                
+                                margin-bottom: 2rem;
+                                
+                                transition: translate 0.5s;
+                                
+                                i {
+                                	position: absolute;
+                                    right: 0;
+                                
+                                	font-size: inherit;
+                                    
+                                    opacity: 0;
+                                    
+                                    transition: all 0.5s;
+                            	}
+                            }
+                            
+                            h1:hover {
+                            	translate: -5rem 0;
+                                
+                                i {
+                                	opacity: 1;
+                                    right: -5rem;
+                                }
+                            }
+                            
+                            p {
+                            	font-size: 2rem;
+                            }
+                        }
+                    }
+                    
+                    .background.active {
+                    	opacity: 1;
+                        
+                        pointer-events: all;
+                    }
+            	}
+            }
+        </style>
+        
+        <style>
+        	main {
+            	display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5rem;
+                
+                padding: 8rem 2rem;
+                
+                background-color: grey;
+                
+                h1 {
+                	font-size: 4rem;
+                    text-align: center;
+                    
+                    width: 50%;
+                    
+                    margin-bottom: 5rem;
+                    
+                    span {
+                    	font-size: inherit;
+                        
+                        text-transform: uppercase;
+                        
+                        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+                    }
+                }
+                
+                .cards {
+                	display: flex;
+                    justify-content: center;
+                    gap: 3rem;
+                    
+                    width: 100%;
+                    
+                    .card {
+                    	display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 2rem;
+                        text-align: center;
+                        max-width: 15rem;
+                        
+                        i {
+                        	font-size: 4rem;
+                        }
+                        
+                        h2 {
+                        	font-size: 2rem;
+                        }
+                        
+                        p {
+                        	font-size: 1.25rem;
+                        }
+                    }
+                }
+            }
+        </style>
+    </head>
+    <body data-new-gr-c-s-check-loaded="14.1239.0" data-gr-ext-installed="">
+		<nav id="navbar" class="">
+        	<div class="bg"></div>
+        	<a href="#" class="active">Home</a>
+            <a href="#">Services</a>
+            <a href="#">Shop</a>
+            <a href="#">Newsletter</a>
+            <a href="#">Contact</a>
+            <a href="#">
+            	<i class="fa-regular fa-cart-shopping"></i>
+            </a>
+        </nav>
+        
+        <header>
+        	<div id="header-backgrounds" class="backgrounds">
+            	<div class="background" href="#">
+                	<img src="film.jpg">
+                    <div class="text">
+                    	<a href="#"><h1>Film Processing<i class="fa-solid fa-arrow-right"></i></h1></a>
+                        <p>We process and print 35mm Film on Monday and Thursday each week. Ready for collection the next day.</p>
+                    </div>
+                </div>
+                <div class="background active">
+                	<img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?q=80&amp;w=3570&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="text">
+                    	<a href="#"><h1>Courses<i class="fa-solid fa-arrow-right"></i></h1></a>
+                        <p>Take better photographs, learn new techniques, master editing, image manipulation and more.</p>
+                    </div>
+                </div>
+            	<div class="background">
+                	<img src="https://images.unsplash.com/photo-1500964757637-c85e8a162699?q=80&amp;w=3603&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="text">
+                    	<a href="#"><h1>Events Gallery<i class="fa-solid fa-arrow-right"></i></h1></a>
+                        <p>Our 10 minute service for Visa and License photos taken inside our portrait studio.</p>
+                    </div>
+                </div>
+                <div class="background">
+                	<img src="https://images.unsplash.com/photo-1511884642898-4c92249e20b6?q=80&amp;w=3570&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="text">
+                    	<a href="#"><h1>Passports<i class="fa-solid fa-arrow-right"></i></h1></a>
+                        <p>Our 10 minute service for Visa and License photos taken inside our portrait studio.</p>
+                    </div>
+                </div>
+            </div>
+        	<div class="logo">
+            	<img src="logo.png">
+            </div>
+        	<div id="header-dots" class="dots">
+            	<div class="dot" data-id="0"></div>
+                <div class="dot active" data-id="1"></div>
+                <div class="dot" data-id="2"></div>
+                <div class="dot" data-id="3"></div>
+            </div>
+        </header>
+        
+        <main>
+        	<h1><span>Expert</span> advice from staff who <span>love</span> photography.</h1>
+            <div class="cards">
+            	<div class="card">
+                	<i class="fa-solid fa-house"></i>
+                    <h2>Locally Owned</h2>
+                    <p>We opened our doors 25+ years ago with the purpose of providing everything photographic under one roof.</p>
+                </div>
+                <div class="card">
+                	<i class="fa-solid fa-award"></i>
+                    <h2>Experience &amp; Advice</h2>
+                    <p>The most important part of our job is to match the most suitable products to deliver the results you want.</p>
+                </div>
+                <div class="card">
+                	<i class="fa-solid fa-dollar-sign"></i>
+                    <h2>Best Price</h2>
+                    <p>Our Prices are competitive Australia wide. Camera House is Australias largest seller of camera gear.</p>
+                </div>
+                <div class="card">
+                	<i class="fa-solid fa-briefcase-blank"></i>
+                    <h2>Warranty</h2>
+                    <p>Authorised Australian resellers of all the products we sell. Guaranteed support from the genuine brand.</p>
+                </div>
+            </div>
+        </main>
+        
+        <script>
+        	const headerBackgroundsEl = document.getElementById("header-backgrounds");
+            const headerDotsEl = document.getElementById("header-dots");
+        
+        	let headerSlideNum = 0;
+            
+            Array.from(headerDotsEl.children).forEach((dot) => {
+                	dot.addEventListener("click", (event) => {
+                    	clearInterval(headerSlide);
+                    
+                    	headerSlideNum = parseInt(dot.getAttribute("data-id"));
+                        
+                        updateHeaderSlide();
+                    });
+            });
+            
+            updateHeaderSlide();
+            
+            const headerSlide = setInterval(function () {
+            	headerSlideNum += 1;
+                
+                updateHeaderSlide();
+            }, 5000);
+            
+            function updateHeaderSlide() {
+            	Array.from(headerBackgroundsEl.children).forEach((bg) => {
+                	bg.classList.remove("active");
+                });
+                
+                Array.from(headerDotsEl.children).forEach((dot) => {
+                	dot.classList.remove("active");
+                });
+                
+            	headerBackgroundsEl.children[headerSlideNum % 4].classList.add("active");
+                
+                headerDotsEl.children[headerSlideNum % 4].classList.add("active");
+            }
+        </script>
+        
+        <script>
+        	const navEl = document.getElementById("navbar");
+        
+        	document.addEventListener("scroll", (event) => {
+            	navEl.classList.add("active");
+                
+                setTimeout(() => {
+                  navEl.classList.remove("active");
+                }, 3000);
+            });
+        </script>
+	
+    </body>
+</html>
